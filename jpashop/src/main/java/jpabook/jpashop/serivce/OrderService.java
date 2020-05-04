@@ -8,9 +8,12 @@ import jpabook.jpashop.domain.item.Item;
 import jpabook.jpashop.repository.ItemRepository;
 import jpabook.jpashop.repository.MemberRepository;
 import jpabook.jpashop.repository.OrderRepository;
+import jpabook.jpashop.repository.OrderSearch;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -25,7 +28,7 @@ public class OrderService {
      * 주문
      * 비즈니스 로직은 대부분 각각의 엔티티 내부에 있음. 서비스 계층은 엔티티로 위임만 함.
      * 엔티티에 핵심 비즈니스 로직을 넣는 방법 > 도메인 모델 패턴
-     *
+     * <p>
      * 참고. 일반적으로 내가 쓰는 서비스에서 비즈니스 로직을 수행하는 방법 > 트랜젝션 스크립트 패턴
      */
     @Transactional
@@ -61,7 +64,9 @@ public class OrderService {
     /**
      * 검색
      */
-//    public List<Order> findOrders(OrderSearch orderSearch) {
-//        return orderRepository.findAll(orderSearch);
-//    }
+    public List<Order> findOrders(OrderSearch orderSearch) {
+        //todo 둘다 잘 쓰지 않는 방법임 >> querydsl 사용해야함.
+//        return orderRepository.findAllByString(orderSearch);
+        return orderRepository.findAllByCriteria(orderSearch);
+    }
 }
