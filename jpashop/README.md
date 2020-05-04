@@ -28,3 +28,28 @@ logging:
 ```groovy
 implementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.6.1")
 ```
+
+### 파라미터로 변수 빼기 단축키
+
+변수 선택 > `command + option + p` 하면 해당 값이 메서드 파라미터로 빠진다.
+
+```java
+class test{
+    private Item createItem(String name, int price, int stockQuantity) {
+        Item item = new Book();
+        item.setName(name);
+        item.setPrice(price);
+        item.setStockQuantity(stockQuantity);
+        em.persist(item);
+        return item;
+    }
+    
+    private Member createMember() {
+        Member member = new Member();
+        member.setName("회원1");
+        member.setAddress(new Address("서울", "강가", "123-123"));
+        em.persist(member);
+        return member;
+    }
+}
+```

@@ -21,8 +21,8 @@ public class OrderRepository {
     }
 
     //주문검색
-    public List<Order> findAll(OrderSearch orderSearch) {
-        return em.createQuery("select o from Order o", Order.class)
-                .getResultList();
-    }
+//    public List<Order> findAll(OrderSearch orderSearch) {
+//        return em.createQuery("select o from Order o", Order.class)
+//                .getResultList();
+//    }
 }
