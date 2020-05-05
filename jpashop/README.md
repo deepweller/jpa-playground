@@ -29,7 +29,9 @@ logging:
 implementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.6.1")
 ```
 
-### 파라미터로 변수 빼기 단축키
+### 단축키
+
+#### 파라미터로 변수 빼기 
 
 변수 선택 > `command + option + p` 하면 해당 값이 메서드 파라미터로 빠진다.
 
@@ -53,3 +55,7 @@ class test{
     }
 }
 ```
+
+#### 최근 사용 파일
+
+editor > `command + e`
