@@ -20,6 +20,16 @@ public class ItemService {
         itemRepository.save(item);
     }
 
+    @Transactional
+    public Item updateItem(Long itemId, String name, int price) {
+        //트래잭션 내에서 조회, set해야 영속성컨택스트의 더티체킹 가능
+        Item findItem = itemRepository.findOne(itemId);
+        findItem.setPrice(price);
+        findItem.setName(name);
+
+        return findItem;
+    }
+
     public Item findOne(Long itemId) {
         return itemRepository.findOne(itemId);
     }

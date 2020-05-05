@@ -59,3 +59,7 @@ class test{
 #### 최근 사용 파일
 
 editor > `command + e`
+
+#### upper case
+
+select char > `command + shift + u`
