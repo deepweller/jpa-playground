@@ -6,6 +6,8 @@ spring:
     driver-class-name: org.h2.Driver
   jpa:
     hibernate:
+      # create 로 했을 때, autoincrement 값이 1로 초기화 되서 에러나는 경우가 생겼음, update로 바꾸거나 h2를 1.4.199로 다운그레이드 해도 됨.
+      # 1.4.200 create 로 했을 때 drop 이 안됨.
       ddl-auto: create
     properties:
       hibernate:
