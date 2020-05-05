@@ -66,7 +66,7 @@ public class OrderService {
      */
     public List<Order> findOrders(OrderSearch orderSearch) {
         //todo 둘다 잘 쓰지 않는 방법임 >> querydsl 사용해야함.
-//        return orderRepository.findAllByString(orderSearch);
-        return orderRepository.findAllByCriteria(orderSearch);
+        return orderRepository.findAllByString(orderSearch);
+//        return orderRepository.findAllByCriteria(orderSearch);
     }
 }
