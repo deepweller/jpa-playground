@@ -1,5 +1,14 @@
 # JPA Playground
 
+## 중요
+
+### dto, entity
+
+**엔티티를 dto로 같이 사용하면 절대 안됨.**
+
+* 엔티티를 api로 노출시키면 추후 유지보수에 큰 문제가 생길 수 있음.
+* 꼭 dto 로 감싸서 노출해야함.
+
 ## tip
 
 ### devtools

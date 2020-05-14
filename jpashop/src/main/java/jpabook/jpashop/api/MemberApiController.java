@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController // @Controller + @ResponseBody
 @RequiredArgsConstructor
@@ -42,6 +44,35 @@ public class MemberApiController {
         memberService.update(id, request.getName());
         Member findMember = memberService.findOne(id);
         return new UpdateMemberResponse(findMember.getId(), findMember.getName());
+    }
+
+    @GetMapping("/api/v1/members")
+    public List<Member> memberV1() {
+        // 엔티티를 외부에 노출하면 좋지 않음.
+        // @JsonIgnore 로 노출하고 싶지 않은 필드는 가릴 수 있지만, 엔티티는 다른 곳에서도 사용할 수 있기 때문에 좋지 않은 방법임.
+        return memberService.findAll();
+    }
+
+    @GetMapping("/api/v2/members")
+    public Result memberV2() {
+        List<Member> findMembers = memberService.findAll();
+        List<MemberDto> members = findMembers.stream()
+                .map(m -> new MemberDto(m.getName()))
+                .collect(Collectors.toList());
+        return new Result(members, members.size());
+    }
+
+    @Data
+    @AllArgsConstructor
+    static class Result<T> {
+        private T data;
+        private int count;
+    }
+
+    @Data
+    @AllArgsConstructor
+    static class MemberDto {
+        private String name;
     }
 
     @Data
