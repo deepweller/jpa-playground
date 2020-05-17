@@ -72,3 +72,9 @@ editor > `command + e`
 #### upper case
 
 select char > `command + shift + u`
+
+#### Column Selection mode
+
+editor > `command + shift + 8`
+
+* 컬럼 셀렉션 모드를 킨 상태에서 shift + 방향키로 선택을하면 블록지정이 아닌, 열단위로 커서가 선택됨.

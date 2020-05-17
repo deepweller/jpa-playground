@@ -84,11 +84,28 @@ public class OrderRepository {
         return query.getResultList();
     }
 
+    /**
+     * 재사용성이 좋음, 엔티티를 조회했기 때문에 받아서 서비스단에서 가공하기 좋음
+     */
     public List<Order> findAllWithMemberDelivery() {
         // todo join fecth jpa reference 참고
-        return em.createQuery("select o from Order o" +
-                " join fetch o.member m" // join fetch >> inner join
-                + " join fetch o.delivery d", Order.class) // inner join fetch >> left outer join
+        return em.createQuery(
+                "select o from Order o" +
+                        " join fetch o.member m" // join fetch >> inner join
+                        + " join fetch o.delivery d", Order.class) // inner join fetch >> left outer join
+                .getResultList();
+    }
+
+    /**
+     * 좀 더 성능이 최적화 됐지만, v3대비 재사용성이 좋지는 않음
+     * api 스펙과 리파지토리의 역할(순수 엔티티 조회)이 합쳐져 있어서 좋지 않음. > 이런 용도를 모아둔 별도 패키지에 레파지토리, dto를 분리하는 것도 좋음.
+     */
+    public List<OrderSimpleQueryDto> findOrderDtos() {
+        return em.createQuery(
+                "select new jpabook.jpashop.repository.OrderSimpleQueryDto(o.id, m.name, o.orderDate, o.status, d.address)" +
+                        " from Order o" +
+                        " join o.member m"
+                        + " join o.delivery d", OrderSimpleQueryDto.class)
                 .getResultList();
     }
 }
