@@ -83,4 +83,12 @@ public class OrderRepository {
         TypedQuery<Order> query = em.createQuery(cq).setMaxResults(1000); //최대 1000건
         return query.getResultList();
     }
+
+    public List<Order> findAllWithMemberDelivery() {
+        // todo join fecth jpa reference 참고
+        return em.createQuery("select o from Order o" +
+                " join fetch o.member m" // join fetch >> inner join
+                + " join fetch o.delivery d", Order.class) // inner join fetch >> left outer join
+                .getResultList();
+    }
 }
